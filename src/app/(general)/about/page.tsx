@@ -110,14 +110,14 @@ const page = () => {
         OUR PROJECTS
       </h1>
       <section className="w-full space-y-1 uppercase">
-        <Link href="https://github.com/alperenbekci">
+        <Link href="/trilemmawhitepaper.pdf">
           <p className="text-justify before:mr-3 before:italic before:text-muted-foreground before:content-['(...)'] md:before:mr-6">
             TRILEMMA WALLET is a smart wallet application that allows users to
             carry out their transactions with a comfortable UX.
           </p>
           <div className="group relative h-[clamp(112px,40vw,320px)] w-full saturate-[0.25]">
             <div className="absolute inset-0 z-40 grid place-content-center bg-background/50 font-bold opacity-0 transition-opacity group-hover:opacity-100">
-              (DEVELOPMENT IN PROGRESS, FOLLOW US!)
+              (Download the Whitepaper and Get Info!)
             </div>
 
             <Image
