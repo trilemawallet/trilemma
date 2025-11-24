@@ -22,10 +22,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: {
-    default: siteConfig.name,
-    template: `${siteConfig.name} - %s`,
-  },
+  title: "Trilema WaaS",
   description: siteConfig.description,
   keywords: ["Trilemma", "Open Source", "Development", "WEB3", "Turkey"],
   authors: [
@@ -35,17 +32,25 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Trilemma",
+  icons: {
+    icon: [
+      {
+        url: "/logo.svg",
+        type: "image/svg+xml",
+      },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
-    title: siteConfig.name,
+    title: "Trilema WaaS",
     description: siteConfig.description,
-    siteName: siteConfig.name,
+    siteName: "Trilema WaaS",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: "Trilema WaaS",
     description: siteConfig.description,
     images: [`${siteConfig.url}/opengraph-image.png`],
     creator: "@trilemma",

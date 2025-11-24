@@ -116,17 +116,17 @@ const AssetsView: FC = () => {
                   className="flex items-center justify-between p-4 rounded-xl bg-[rgba(167,232,136,0.05)] hover:bg-[rgba(167,232,136,0.1)] transition-colors cursor-pointer border border-[rgba(167,232,136,0.1)]"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="relative w-10 h-10 rounded-full bg-[rgba(167,232,136,0.2)] flex items-center justify-center overflow-hidden">
+                    <div className="relative w-9 h-9 rounded-full bg-[rgba(167,232,136,0.2)] flex items-center justify-center overflow-hidden">
                       {token.logoUrl ? (
                         <Image
                           src={token.logoUrl}
                           alt={token.symbol}
                           fill
-                          sizes="40px"
-                          className="object-cover w-full h-full"
+                          sizes="32px"
+                          className="object-contain p-1.5"
                         />
                       ) : (
-                        <span className="text-lg">{token.symbol[0]}</span>
+                        <span className="text-sm">{token.symbol[0]}</span>
                       )}
                     </div>
                     <div>

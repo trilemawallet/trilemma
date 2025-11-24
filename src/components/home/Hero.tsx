@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { motion } from "framer-motion";
+import WalletContainer from "@/components/wallet/WalletContainer";
 
 interface HeroProps {}
 
 const Hero: FC<HeroProps> = ({}) => {
+  const [isWalletOpen, setIsWalletOpen] = useState(false);
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 px-6 lg:px-8 overflow-hidden">
       {/* Background Gradient Effects */}
@@ -43,7 +45,10 @@ const Hero: FC<HeroProps> = ({}) => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mt-4 justify-center">
-              <button className="group relative px-8 py-4 bg-[rgba(167,232,136,1)] text-[rgba(23,23,23,1)] font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[rgba(167,232,136,0.3)]">
+              <button 
+                onClick={() => setIsWalletOpen(true)}
+                className="group relative px-8 py-4 bg-[rgba(167,232,136,1)] text-[rgba(23,23,23,1)] font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[rgba(167,232,136,0.3)]"
+              >
                 <span className="relative z-10">Get Started</span>
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </button>
@@ -124,6 +129,8 @@ const Hero: FC<HeroProps> = ({}) => {
           animation: scroll 1.5s ease-in-out infinite;
         }
       `}</style>
+
+      <WalletContainer open={isWalletOpen} onClose={() => setIsWalletOpen(false)} />
     </section>
   );
 };
