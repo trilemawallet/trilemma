@@ -3,9 +3,10 @@
 import { FC, useEffect, useState } from "react";
 import { useWallet } from "@/contexts/WalletContext";
 import Image from "next/image";
+import { ExitIcon } from "@radix-ui/react-icons";
 
 const AssetsView: FC = () => {
-  const { address, tokens, nfts, loadBalances } = useWallet();
+  const { address, tokens, nfts, loadBalances, logout } = useWallet();
   const [activeTab, setActiveTab] = useState<"tokens" | "nfts">("tokens");
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +34,16 @@ const AssetsView: FC = () => {
     <div className="flex flex-col h-full">
       {/* Header */}
       <div className="p-6 border-b border-[rgba(167,232,136,0.1)]">
-        <h2 className="text-lg font-semibold text-white mb-2">My Wallet</h2>
+        <div className="flex items-center gap-2 mb-2">
+          <h2 className="text-lg font-semibold text-white">My Wallet</h2>
+          <button
+            onClick={logout}
+            className="p-1.5 rounded-full hover:bg-[rgba(167,232,136,0.1)] text-gray-400 hover:text-[rgba(167,232,136,1)] transition-all duration-200"
+            title="Logout"
+          >
+            <ExitIcon className="w-4 h-4" />
+          </button>
+        </div>
         <p className="text-xs text-gray-400 font-mono truncate">{address}</p>
         
         {/* Total Value */}
