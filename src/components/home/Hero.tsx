@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 import { motion } from "framer-motion";
 
@@ -46,9 +47,12 @@ const Hero: FC<HeroProps> = ({}) => {
                 <span className="relative z-10">Get Started</span>
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </button>
-              <button className="px-8 py-4 border-2 border-[rgba(167,232,136,1)] text-[rgba(167,232,136,1)] font-semibold rounded-lg transition-all duration-300 hover:bg-[rgba(167,232,136,0.1)] hover:scale-105">
+              <Link
+                href="/learn-more"
+                className="px-8 py-4 border-2 border-[rgba(167,232,136,1)] text-[rgba(167,232,136,1)] font-semibold rounded-lg transition-all duration-300 hover:bg-[rgba(167,232,136,0.1)] hover:scale-105 text-center"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
 
             {/* Stats or Features */}
