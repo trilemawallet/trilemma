@@ -3,12 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useState, useEffect } from "react";
+import { CardStackIcon } from "@radix-ui/react-icons";
 import { MenuLinks } from "@/content/menu-links";
+import PasskeyModal from "@/components/PasskeyModal";
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPasskeyModalOpen, setIsPasskeyModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,10 +48,71 @@ const Header: FC<HeaderProps> = ({}) => {
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          
+          <div className="flex items-center gap-6">
+            {/* Wallet Button */}
+            <button
+              type="button"
+              className="relative z-50 inline-flex items-center gap-2 rounded-full bg-[rgba(167,232,136,1)] px-4 py-2 text-lg font-medium text-black transition-colors duration-300 hover:bg-white"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsPasskeyModalOpen(true);
+              }}
+            >
+              <CardStackIcon className="h-5 w-5 text-black" />
+              Go to my wallet
+            </button>
+          </div>
         </div>
       </div>
+
+      <PasskeyModal
+        open={isPasskeyModalOpen}
+        onClose={() => setIsPasskeyModalOpen(false)}
+        onCreateViaPasskey={() => setIsPasskeyModalOpen(false)}
+        onLoginWithPasskey={() => setIsPasskeyModalOpen(false)}
+      />
+
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden fixed inset-0 bg-[rgba(23,23,23,0.98)] backdrop-blur-lg transition-all duration-300 ${
+          isMobileMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+        style={{ top: "80px" }}
+      >
+        <nav className="flex flex-col items-center justify-center h-full gap-8 px-6">
+          {MenuLinks.map((link, index) => (
+            <Link
+              key={index}
+              href={link.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-[rgba(167,232,136,1)] hover:text-white transition-all duration-300 text-2xl font-medium transform hover:scale-110"
+              style={{
+                animation: isMobileMenuOpen
+                  ? `slideIn 0.3s ease-out ${index * 0.1}s forwards`
+                  : "none",
+                opacity: isMobileMenuOpen ? 1 : 0,
+              }}
+            >
+              {link.title}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      <style jsx>{`
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </header>
   );
 };
