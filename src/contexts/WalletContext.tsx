@@ -10,9 +10,11 @@ import {
 } from "react";
 import WDK from "@tetherto/wdk";
 import WalletManagerEvmErc4337 from "@tetherto/wdk-wallet-evm-erc-4337";
+import WalletManagerEvm from "@tetherto/wdk-wallet-evm";
 import { WalletAccount, WalletView, WalletToken, WalletNFT, Transaction } from "@/types/wallet";
 import { WALLET_CONFIG } from "@/lib/wallet-config";
 import { encryptData, decryptData, generateKey, exportKey, importKey } from "@/lib/crypto";
+import { WalletAccountEvm } from "@tetherto/wdk-wallet-evm";
 
 interface WalletContextType {
   walletAccount: WalletAccount | null;
@@ -52,11 +54,11 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const wdk = new WDK(seedPhrase);
       wdk.registerWallet(
-        "ethereum-erc4337",
-        WalletManagerEvmErc4337,
-        WALLET_CONFIG
+        "ethereum",
+        WalletManagerEvm,
+        {provider: WALLET_CONFIG.provider}
       );
-      const account = await wdk.getAccount("ethereum-erc4337", 0);
+      const account = await wdk.getAccount("ethereum", 0);
       const address = await account.getAddress();
       
       setWalletAccount({
