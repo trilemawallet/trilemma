@@ -74,13 +74,13 @@ const SwapView: FC = () => {
       </div>
 
       {/* Swap Interface */}
-      <div className="flex-1 space-y-2">
+      <div className="flex-1">
         {/* From Token */}
         <div className="p-4 rounded-xl bg-[rgba(167,232,136,0.05)] border border-[rgba(167,232,136,0.2)]">
           <label className="block text-xs font-medium text-gray-400 mb-2">
             From
           </label>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
             <input
               type="number"
               value={fromAmount}
@@ -94,7 +94,7 @@ const SwapView: FC = () => {
             <select
               value={fromToken}
               onChange={(e) => setFromToken(e.target.value)}
-              className="px-3 py-2 rounded-lg bg-[rgba(167,232,136,0.1)] border border-[rgba(167,232,136,0.2)] text-white font-medium focus:outline-none"
+              className="px-2 py-1.5 rounded-lg bg-[rgba(167,232,136,0.1)] border border-[rgba(167,232,136,0.2)] text-white text-sm font-medium focus:outline-none w-20"
             >
               {tokens.map((token) => (
                 <option key={token.symbol} value={token.symbol}>
@@ -123,7 +123,7 @@ const SwapView: FC = () => {
           <label className="block text-xs font-medium text-gray-400 mb-2">
             To
           </label>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center ">
             <input
               type="number"
               value={toAmount}
@@ -134,7 +134,7 @@ const SwapView: FC = () => {
             <select
               value={toToken}
               onChange={(e) => setToToken(e.target.value)}
-              className="px-3 py-2 rounded-lg bg-[rgba(167,232,136,0.1)] border border-[rgba(167,232,136,0.2)] text-white font-medium focus:outline-none"
+              className="px-1 py-1.5 rounded-lg bg-[rgba(167,232,136,0.1)] border border-[rgba(167,232,136,0.2)] text-white text-sm font-medium focus:outline-none w-20"
             >
               <option value="USDT">USDT</option>
               <option value="USDC">USDC</option>
@@ -144,7 +144,7 @@ const SwapView: FC = () => {
         </div>
 
         {/* Rate Info */}
-        <div className="px-4 py-3 rounded-xl bg-[rgba(167,232,136,0.05)] border border-[rgba(167,232,136,0.1)]">
+        <div className="px-4 py-3 rounded-xl bg-[rgba(167,232,136,0.05)] border border-[rgba(167,232,136,0.1)] mt-12">
           <div className="flex justify-between text-sm">
             <span className="text-gray-400">Rate</span>
             <span className="text-white font-medium">
@@ -160,7 +160,7 @@ const SwapView: FC = () => {
         {/* Status Message */}
         {status && (
           <div
-            className={`p-3 rounded-xl text-sm ${
+            className={`p-3 rounded-xl text-sm mt-4 ${
               status.type === "success"
                 ? "bg-[rgba(167,232,136,0.1)] text-[rgba(167,232,136,1)]"
                 : "bg-red-500/10 text-red-400"
@@ -174,7 +174,7 @@ const SwapView: FC = () => {
         <button
           onClick={handleExecuteSwap}
           disabled={loading || !fromAmount}
-          className="w-full py-4 rounded-xl bg-[rgba(167,232,136,1)] text-[rgba(23,23,23,1)] font-semibold hover:bg-white transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 mt-4"
+          className="w-full py-4 rounded-xl bg-[rgba(167,232,136,1)] text-[rgba(23,23,23,1)] font-semibold hover:bg-white transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 mt-8"
         >
           {loading ? "Swapping..." : "Swap Tokens"}
         </button>
