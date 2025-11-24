@@ -17,7 +17,7 @@ const Hero: FC<HeroProps> = ({}) => {
       <div className="max-w-[1600px] mx-auto w-full relative z-10">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start lg:items-center">
           {/* Left Content */}
-          <div className="lg:col-span-5 flex flex-col gap-6 lg:gap-8 lg:pl-12">
+          <div className="lg:col-span-5 flex flex-col gap-6 lg:gap-8 lg:pl-4">
             {/* Main Heading */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-[rgba(167,232,136,1)] to-[rgba(167,232,136,0.8)] bg-clip-text text-transparent">
@@ -69,13 +69,13 @@ const Hero: FC<HeroProps> = ({}) => {
           </div>
 
           {/* Right Content - SDK Image */}
-          <div className="lg:col-span-7 relative flex items-start justify-center lg:justify-end lg:-mt-20">
-            <div className="relative w-full max-w-4xl">
+          <div className="lg:col-span-7 relative flex items-start justify-center lg:justify-end lg:-mt-44">
+            <div className="relative w-full max-w-5xl">
               {/* Glow Effect Behind Image */}
               <div className="absolute inset-0 bg-[rgba(167,232,136,0.15)] blur-3xl rounded-full"></div>
               
               {/* SDK Image */}
-              <div className="relative animate-float">
+              <div className="relative">
                 <Image
                   src="/trilema-sdk.svg"
                   alt="Trilema SDK Interface"
@@ -87,30 +87,14 @@ const Hero: FC<HeroProps> = ({}) => {
               </div>
 
               {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-[rgba(167,232,136,0.3)] rounded-lg rotate-12 animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-20 h-20 border-2 border-[rgba(167,232,136,0.3)] rounded-lg -rotate-12 animate-pulse"></div>
+              <div className="absolute -top-1 -right-4 w-24 h-24 border-2 border-[rgba(167,232,136,0.3)] rounded-lg rotate-12 animate-pulse"></div>
+              <div className="absolute -bottom-20 -left-10 w-20 h-20 border-2 border-[rgba(167,232,136,0.3)] rounded-lg -rotate-12 animate-pulse"></div>
             </div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-[rgba(167,232,136,0.5)] rounded-full flex items-start justify-center p-2">
-            <div className="w-1.5 h-2 bg-[rgba(167,232,136,1)] rounded-full animate-scroll"></div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
         @keyframes scroll {
           0% {
             transform: translateY(0);
@@ -120,9 +104,6 @@ const Hero: FC<HeroProps> = ({}) => {
             transform: translateY(12px);
             opacity: 0;
           }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
         }
         .animate-scroll {
           animation: scroll 1.5s ease-in-out infinite;

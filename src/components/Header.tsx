@@ -9,7 +9,6 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,85 +45,9 @@ const Header: FC<HeaderProps> = ({}) => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-10">
-            {MenuLinks.map((link, index) => (
-              <Link
-                key={index}
-                href={link.href}
-                className="relative text-[rgba(167,232,136,1)] hover:text-white transition-colors duration-300 text-lg font-medium group"
-              >
-                {link.title}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[rgba(167,232,136,1)] transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span
-              className={`w-6 h-0.5 bg-[rgba(167,232,136,1)] transition-all duration-300 ${
-                isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            ></span>
-            <span
-              className={`w-6 h-0.5 bg-[rgba(167,232,136,1)] transition-all duration-300 ${
-                isMobileMenuOpen ? "opacity-0" : ""
-              }`}
-            ></span>
-            <span
-              className={`w-6 h-0.5 bg-[rgba(167,232,136,1)] transition-all duration-300 ${
-                isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            ></span>
-          </button>
+          
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden fixed inset-0 bg-[rgba(23,23,23,0.98)] backdrop-blur-lg transition-all duration-300 ${
-          isMobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-        style={{ top: "80px" }}
-      >
-        <nav className="flex flex-col items-center justify-center h-full gap-8 px-6">
-          {MenuLinks.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-[rgba(167,232,136,1)] hover:text-white transition-all duration-300 text-2xl font-medium transform hover:scale-110"
-              style={{
-                animation: isMobileMenuOpen
-                  ? `slideIn 0.3s ease-out ${index * 0.1}s forwards`
-                  : "none",
-                opacity: isMobileMenuOpen ? 1 : 0,
-              }}
-            >
-              {link.title}
-            </Link>
-          ))}
-        </nav>
-      </div>
-
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </header>
   );
 };
