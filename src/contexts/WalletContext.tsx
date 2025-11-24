@@ -196,7 +196,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const url = new URL("https://api.etherscan.io/v2/api");
       url.search = new URLSearchParams({
-        apikey: "PE8KPC2FNRC8FZ38XA7Q9869M869WAMAT2",
+        apikey: process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY || "",
         chainid: WALLET_CONFIG.chainId.toString(),
         module: "account",
         action: "txlist",
