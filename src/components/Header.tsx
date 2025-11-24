@@ -60,7 +60,7 @@ const Header: FC<HeaderProps> = ({}) => {
               }}
             >
               <CardStackIcon className="h-5 w-5 text-black" />
-              Go to my wallet
+              Try our Wallet
             </button>
           </div>
         </div>

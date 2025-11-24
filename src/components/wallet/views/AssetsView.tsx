@@ -3,12 +3,13 @@
 import { FC, useEffect, useState } from "react";
 import { useWallet } from "@/contexts/WalletContext";
 import Image from "next/image";
-import { ExitIcon } from "@radix-ui/react-icons";
+import { ExitIcon, CopyIcon, CheckIcon } from "@radix-ui/react-icons";
 
 const AssetsView: FC = () => {
   const { address, tokens, nfts, loadBalances, logout } = useWallet();
   const [activeTab, setActiveTab] = useState<"tokens" | "nfts">("tokens");
   const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (address) {
@@ -30,6 +31,14 @@ const AssetsView: FC = () => {
 
   const totalValue = tokens.reduce((sum, token) => sum + (token.usdValue || 0), 0);
 
+  const copyAddress = async () => {
+    if (address) {
+      await navigator.clipboard.writeText(address);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
@@ -44,7 +53,20 @@ const AssetsView: FC = () => {
             <ExitIcon className="w-4 h-4" />
           </button>
         </div>
-        <p className="text-xs text-gray-400 font-mono truncate">{address}</p>
+        <div className="flex items-center gap-2">
+          <p className="text-xs text-gray-400 font-mono truncate">{address}</p>
+          <button
+            onClick={copyAddress}
+            className="p-1 rounded hover:bg-[rgba(167,232,136,0.1)] text-gray-400 hover:text-[rgba(167,232,136,1)] transition-all duration-200 flex-shrink-0"
+            title={copied ? "Copied!" : "Copy address"}
+          >
+            {copied ? (
+              <CheckIcon className="w-3.5 h-3.5 text-[rgba(167,232,136,1)]" />
+            ) : (
+              <CopyIcon className="w-3.5 h-3.5" />
+            )}
+          </button>
+        </div>
         
         {/* Total Value */}
         <div className="mt-4">
