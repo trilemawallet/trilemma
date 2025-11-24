@@ -1,25 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="body_1" width="1123" height="793">
   <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:rgba(167,232,136,1);stop-opacity:1" />
-      <stop offset="100%" style="stop-color:rgba(167,232,136,0.8);stop-opacity:1" />
-    </linearGradient>
+    <clipPath id="1">
+      <path clip-rule="evenodd" transform="matrix(1 0 0 1 0 0)" d="M0 595L0 0L0 0L842 0L842 0L842 595L842 595L0 595z"/>
+    </clipPath>
+    <clipPath id="2">
+      <path clip-rule="evenodd" transform="matrix(1 0 0 1 0 0)" d="M90 0L842 0L842 0L842 595L842 595L90 595z"/>
+    </clipPath>
+    <clipPath id="3">
+      <path clip-rule="evenodd" transform="matrix(1 0 0 1 0 0)" d="M96 78L234 78L234 78L234 108L234 108L96 108z"/>
+    </clipPath>
+    <clipPath id="4">
+      <path clip-rule="evenodd" transform="matrix(1 0 0 1 0 0)" d="M96 78L234 78L234 78L234 108L234 108L96 108z"/>
+    </clipPath>
   </defs>
-  
-  <!-- Triangle with gradient -->
-  <path d="M50 15 L85 75 L15 75 Z" 
-        fill="url(#gradient)" 
-        stroke="rgba(167,232,136,1)" 
-        stroke-width="2"/>
-  
-  <!-- Inner triangle -->
-  <path d="M50 35 L70 65 L30 65 Z" 
-        fill="rgba(23,23,23,0.9)" 
-        stroke="rgba(167,232,136,0.6)" 
-        stroke-width="1.5"/>
-  
-  <!-- Center circle -->
-  <circle cx="50" cy="50" r="8" 
-          fill="rgba(167,232,136,1)"/>
+  <g transform="matrix(1.3333 0 0 1.3333 0 0)">
+    <g clip-path="url(#1)">
+      <g clip-path="url(#2)">
+        <g clip-path="url(#3)">
+          <g clip-path="url(#4)">
+            <path transform="matrix(1 0 0 -1 0 595)" d="M112.798996 498.761C 112.719 498.763 112.641 498.772 112.565 498.786C 111.849 498.913 111.307 499.534 111.307 500.281C 111.307 501.027 111.849 501.648 112.565 501.776C 112.653 501.792 112.745 501.8 112.838 501.8C 113.734 501.8 114.45 501.036 114.362 500.129C 114.285 499.344 113.594 498.741 112.798996 498.761zM108.259 504.845L108.248 504.845C 105.015 504.845 102.365 507.33398 102.14 510.488C 102.123 510.722 102.304 510.923 102.54 510.938C 105.616 511.143 108.063 513.603 108.233 516.666C 108.243 516.85 108.1 517.005 107.914 517C 105.808 516.944 103.835 516.36 102.124 515.377C 98.463 513.275 96 509.345 96 504.845C 96 499.232 99.701 494.706 104.904 493.313C 105.085 493.265 105.18 493.133 105.182 492.947L105.182 492.947L105.183 492.91L105.183 492.91L105.186 487.74C 105.186 487.29102 105.587 486.945 106.036 487.007C 108.939 487.407 110.967 489.767 111.07 492.727C 111.075 492.869 111.172 492.992 111.31 493.029C 113.868 493.646 116.075 495.06 117.685 496.992C 117.685 496.992 118.975 498.489 119.808 500.739C 120.546 502.731 119.065 504.845 116.927 504.845L116.927 504.845L108.259 504.845z" stroke="none" fill="#C0F49B" fill-rule="nonzero"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
 </svg>
-
