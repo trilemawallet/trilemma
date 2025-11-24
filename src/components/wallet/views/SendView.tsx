@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 import { useWallet } from "@/contexts/WalletContext";
 
 const SendView: FC = () => {
-  const { tokens, addTransaction } = useWallet();
+  const { tokens, walletAccount } = useWallet();
   const [recipient, setRecipient] = useState("");
   const [amount, setAmount] = useState("");
   const [selectedToken, setSelectedToken] = useState(tokens[0]?.symbol || "ETH");
@@ -17,25 +17,33 @@ const SendView: FC = () => {
       return;
     }
 
+    if (!walletAccount) {
+      setStatus({ message: "Wallet not connected", type: "error" });
+      return;
+    }
+
     setLoading(true);
     setStatus(null);
 
     try {
-      // Mock transaction - will integrate with WDK
+      const txResult = await walletAccount.instance.sendTransaction({
+        to: recipient,
+        value: Number(amount) * 10 ** 18, // Assuming ETH for simplicity
+      });
+
+      if (!txResult || !txResult.hash) {
+        throw new Error("Transaction submission failed");
+      }
+
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      const tx = {
-        hash: `0x${Math.random().toString(16).substring(2, 66)}`,
-        from: "0x...",
-        to: recipient,
-        value: amount,
-        timestamp: Date.now(),
-        status: "success" as const,
-        type: "send" as const,
-        tokenSymbol: selectedToken,
-      };
+      const receipt = await walletAccount.instance.getTransactionReceipt(txResult.hash);
 
-      addTransaction(tx);
+      if (!receipt) {
+        throw new Error("No transaction receipt returned");
+      }
+
+      console.log("Transaction receipt:", receipt);
       setStatus({ message: "Transaction sent successfully!", type: "success" });
       setRecipient("");
       setAmount("");
@@ -107,7 +115,7 @@ const SendView: FC = () => {
             <button
               onClick={() => {
                 const token = tokens.find((t) => t.symbol === selectedToken);
-                if (token) setAmount(token.balance);
+                if (token) setAmount(token.balance.toString());
               }}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-[rgba(167,232,136,1)] hover:text-white transition-colors"
             >
@@ -143,4 +151,3 @@ const SendView: FC = () => {
 };
 
 export default SendView;
-

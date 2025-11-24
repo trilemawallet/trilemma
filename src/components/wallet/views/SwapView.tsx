@@ -3,6 +3,7 @@
 import { FC, useState } from "react";
 import { useWallet } from "@/contexts/WalletContext";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
+import { Transaction } from "@/types/wallet";
 
 const SwapView: FC = () => {
   const { tokens, addTransaction } = useWallet();
@@ -33,14 +34,24 @@ const SwapView: FC = () => {
       // Mock swap - will integrate with actual DEX
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      const tx = {
+      const tx: Transaction = {
         hash: `0x${Math.random().toString(16).substring(2, 66)}`,
         from: "0x...",
         to: "0x...",
-        value: fromAmount,
+        blockHash: null,
+        blockNumber: null,
+        transactionIndex: null,
+        nonce: null,
+        value: "0",
+        gas: null,
+        gasPrice: null,
+        gasUsed: null,
+        cumulativeGasUsed: null,
+        contractAddress: null,
         timestamp: Date.now(),
-        status: "success" as const,
-        type: "swap" as const,
+        status: 1,
+        direction: "swap",
+        amount: `${fromAmount} ${fromToken} → ${toAmount} ${toToken}`,
         tokenSymbol: `${fromToken} → ${toToken}`,
       };
 
@@ -184,4 +195,3 @@ const SwapView: FC = () => {
 };
 
 export default SwapView;
-

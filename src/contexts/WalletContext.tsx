@@ -31,6 +31,7 @@ interface WalletContextType {
   createWallet: (seedPhrase: string) => Promise<void>;
   addTransaction: (tx: Transaction) => void;
   loadBalances: () => Promise<void>;
+  refreshTransactions: () => Promise<boolean>;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
@@ -60,6 +61,10 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
       );
       const account = await wdk.getAccount("ethereum", 0);
       const address = await account.getAddress();
+      const balance = await account.getBalance();
+
+      console.log(`✅ Wallet Address: ${address}`);
+      console.log(`💰 Wallet Balance: ${Number(balance)/(10**18)} ETH`);
       
       setWalletAccount({
         address,
@@ -170,18 +175,105 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
     if (!walletAccount) return;
     
     try {
-      // Mock data for now - in production, fetch real balances
+      const balance = await walletAccount.instance.getBalance();
       setTokens([
         {
           symbol: "ETH",
           name: "Ethereum",
-          balance: "0.0",
+          balance: Number(balance)/10**18,
           decimals: 18,
-          usdValue: 0,
+          usdValue: Number(balance)/10**18 * 2973, // Mock USD value
         },
       ]);
     } catch (error) {
       console.error("Failed to load balances:", error);
+    }
+  }, [walletAccount]);
+
+  const refreshTransactions = useCallback(async () => {
+    if (!walletAccount?.address) return false;
+
+    try {
+      const url = new URL("https://api.etherscan.io/v2/api");
+      url.search = new URLSearchParams({
+        apikey: "PE8KPC2FNRC8FZ38XA7Q9869M869WAMAT2",
+        chainid: WALLET_CONFIG.chainId.toString(),
+        module: "account",
+        action: "txlist",
+        address: walletAccount.address,
+        page: "1",
+        offset: "25",
+        tag: "latest",
+        startblock: "0",
+        endblock: "9999999999",
+        sort: "desc",
+      }).toString();
+
+      const response = await fetch(url.toString());
+      const data = await response.json();
+
+      if (data.status !== "1" || !Array.isArray(data.result)) {
+        console.error("Failed to fetch transactions", data);
+        return false;
+      }
+
+      const mapped: Transaction[] = data.result.map((tx: any) => {
+        const direction =
+          tx.from?.toLowerCase() === walletAccount.address.toLowerCase()
+            ? "send"
+            : "receive";
+        const valueLabel = () => {
+          const rawValue = tx.value ?? "0";
+          const numeric = Number(rawValue);
+          if (Number.isNaN(numeric)) return String(rawValue);
+          return `${(numeric / 1e18).toFixed(6)} ETH`;
+        };
+        const statusValue =
+          tx.txreceipt_status !== undefined && tx.txreceipt_status !== null
+            ? Number(tx.txreceipt_status)
+            : tx.isError !== undefined && tx.isError !== null
+              ? Number(tx.isError) === 0
+                ? 1
+                : 0
+              : null;
+
+        return {
+          hash: tx.hash,
+          from: tx.from,
+          to: tx.to || null,
+          blockHash: tx.blockHash || null,
+          blockNumber: tx.blockNumber ? Number(tx.blockNumber) : null,
+          transactionIndex: tx.transactionIndex ? Number(tx.transactionIndex) : null,
+          nonce: tx.nonce ? Number(tx.nonce) : null,
+          value: tx.value ?? "0",
+          gas: tx.gas ?? null,
+          gasPrice: tx.gasPrice ?? null,
+          gasUsed: tx.gasUsed ?? null,
+          cumulativeGasUsed: tx.cumulativeGasUsed ?? null,
+          timestamp: tx.timeStamp ? Number(tx.timeStamp) * 1000 : null,
+          status: statusValue as 0 | 1 | null,
+          isError: tx.isError,
+          txReceiptStatus: tx.txreceipt_status ?? tx.txReceiptStatus,
+          input: tx.input,
+          contractAddress: tx.contractAddress || null,
+          confirmations: tx.confirmations,
+          methodId: tx.methodId,
+          functionName: tx.functionName,
+          l1Gas: tx.L1Gas,
+          l1GasPrice: tx.L1GasPrice,
+          l1FeesPaid: tx.L1FeesPaid,
+          l1FeeScalar: tx.L1FeeScalar,
+          direction,
+          amount: valueLabel(),
+          tokenSymbol: tx.contractAddress ? undefined : "ETH",
+        };
+      });
+
+      setTransactions(mapped);
+      return true;
+    } catch (error) {
+      console.error("Failed to fetch transactions:", error);
+      return false;
     }
   }, [walletAccount]);
 
@@ -206,6 +298,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
       createWallet,
       addTransaction,
       loadBalances,
+      refreshTransactions,
     }),
     [
       walletAccount,
@@ -221,6 +314,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
       createWallet,
       addTransaction,
       loadBalances,
+      refreshTransactions,
     ]
   );
 
