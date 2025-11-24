@@ -5,13 +5,13 @@ import Link from "next/link";
 import { FC, useState, useEffect } from "react";
 import { CardStackIcon } from "@radix-ui/react-icons";
 import { MenuLinks } from "@/content/menu-links";
-import PasskeyModal from "@/components/PasskeyModal";
+import WalletContainer from "@/components/wallet/WalletContainer";
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isPasskeyModalOpen, setIsPasskeyModalOpen] = useState(false);
+  const [isWalletOpen, setIsWalletOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -52,10 +52,11 @@ const Header: FC<HeaderProps> = ({}) => {
             {/* Wallet Button */}
             <button
               type="button"
+              id="wallet-button"
               className="relative z-50 inline-flex items-center gap-2 rounded-full bg-[rgba(167,232,136,1)] px-4 py-2 text-lg font-medium text-black transition-colors duration-300 hover:bg-white"
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                setIsPasskeyModalOpen(true);
+                setIsWalletOpen(true);
               }}
             >
               <CardStackIcon className="h-5 w-5 text-black" />
@@ -65,12 +66,7 @@ const Header: FC<HeaderProps> = ({}) => {
         </div>
       </div>
 
-      <PasskeyModal
-        open={isPasskeyModalOpen}
-        onClose={() => setIsPasskeyModalOpen(false)}
-        onCreateViaPasskey={() => setIsPasskeyModalOpen(false)}
-        onLoginWithPasskey={() => setIsPasskeyModalOpen(false)}
-      />
+      <WalletContainer open={isWalletOpen} onClose={() => setIsWalletOpen(false)} />
 
       {/* Mobile Menu */}
       <div
