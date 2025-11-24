@@ -183,6 +183,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
           balance: Number(balance)/10**18,
           decimals: 18,
           usdValue: Number(balance)/10**18 * 2973, // Mock USD value
+          logoUrl: "/ethereumlogo.png",
         },
       ]);
     } catch (error) {
