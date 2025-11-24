@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "Trilema WaaS - About",
 };
 
 const page = () => {

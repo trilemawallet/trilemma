@@ -2,7 +2,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Smart Wallet Infrastructure for the Next Generation of Web3",
+  title: "Trilema WaaS - Learn More",
 };
 
 const WHY_TRILEMA = [

@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   keywords: ["Trilemma", "Open Source", "Development", "WEB3", "Turkey"],
   authors: [
     {
-      name: "Trilemma",
+      name: "Trilema",
       url: baseUrl,
     },
   ],
-  creator: "Trilemma",
+  creator: "Trilema",
   icons: {
     icon: [
       {
