@@ -43,7 +43,7 @@ const SendView: FC = () => {
         throw new Error("No transaction receipt returned");
       }
 
-      console.log("Transaction receipt:", receipt);
+      // console.log("Transaction receipt:", receipt);
       setStatus({ message: "Transaction sent successfully!", type: "success" });
       setRecipient("");
       setAmount("");

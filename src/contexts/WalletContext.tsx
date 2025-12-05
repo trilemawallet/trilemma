@@ -63,8 +63,8 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
       const address = await account.getAddress();
       const balance = await account.getBalance();
 
-      console.log(`✅ Wallet Address: ${address}`);
-      console.log(`💰 Wallet Balance: ${Number(balance)/(10**18)} ETH`);
+      // console.log(`✅ Wallet Address: ${address}`);
+      // console.log(`💰 Wallet Balance: ${Number(balance)/(10**18)} ETH`);
       
       setWalletAccount({
         address,
@@ -75,7 +75,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
       // Ensure view changes after authentication
       setTimeout(() => {
         setCurrentView("assets");
-        console.log("✅ Wallet initialized, switching to assets view");
+        // console.log("✅ Wallet initialized, switching to assets view");
       }, 0);
     } catch (error) {
       console.error("Failed to initialize wallet:", error);
