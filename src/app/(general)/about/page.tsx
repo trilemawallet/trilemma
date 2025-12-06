@@ -224,7 +224,7 @@ const page = () => {
                   href={email}
                   className="text-primary underline underline-offset-2"
                 >
-                  trilemmadev@gmail.com
+                  info@trilema.io
                 </a>
               </>
             }

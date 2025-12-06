@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: "Trilema WaaS",
   description: siteConfig.description,
-  keywords: ["Trilemma", "Open Source", "Development", "WEB3", "Turkey"],
+  keywords: ["Trilema", "WEB3", "Self Custody", "WaaS"],
   authors: [
     {
       name: "Trilema",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/logo.svg",
-        type: "image/svg+xml",
+        url: "/icon.png",
+        type: "image/png",
       },
     ],
   },
@@ -47,13 +47,21 @@ export const metadata: Metadata = {
     title: "Trilema WaaS",
     description: siteConfig.description,
     siteName: "Trilema WaaS",
+    images: [
+      {
+        url: "/opengraph-image.png", // Make sure this file exists in your public folder
+        width: 1026,
+        height: 1026,
+        alt: "Trilema WaaS",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Trilema WaaS",
     description: siteConfig.description,
     images: [`${siteConfig.url}/opengraph-image.png`],
-    creator: "@trilemma",
+    creator: "@trilema",
   },
 };
 

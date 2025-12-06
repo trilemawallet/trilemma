@@ -6,6 +6,6 @@ export const baseUrl = process.env["NEXT_PUBLIC_VERCEL_URL"]
 
 export const siteConfig: SiteConfig = {
   name: "",
-  description: "Trilemma is an open source development team.",
-  url: baseUrl,
+  description: "Self-Custodial Web3 Wallet Infrastructure",
+  url: "wallet.trilema.io",
 };
