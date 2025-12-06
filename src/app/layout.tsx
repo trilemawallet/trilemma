@@ -32,14 +32,6 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Trilema",
-  icons: {
-    icon: [
-      {
-        url: "/icon.png",
-        type: "image/png",
-      },
-    ],
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
